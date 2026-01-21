@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Figtree } from "next/font/google";
+import { Figtree, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import type { ReactNode } from "react";
+import Sidebar from "@/components/Sidebar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { PomodoroContextProvider } from "@/contexts/PomodoroContext";
+import { SettingsContextProvider } from "@/features/settings/context/SettingsContext";
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,14 +28,31 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
-    <html lang="en" className={figtree.variable}>
+    <html lang="en" className={figtree.variable} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SidebarProvider>
+            <SettingsContextProvider>
+              <PomodoroContextProvider>
+                <Sidebar />
+                <main className="w-full h-full">
+                  <SidebarTrigger />
+                  {children}
+                </main>
+              </PomodoroContextProvider>
+            </SettingsContextProvider>
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
