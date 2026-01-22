@@ -1,8 +1,15 @@
 "use client";
 
-import {createContext, type Dispatch, type ReactNode, type SetStateAction, useContext, useState,} from "react";
-import {useTimer} from "react-timer-hook";
-import {useSettings} from "@/features/settings/context/SettingsContext";
+import {
+  createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  useContext,
+  useState,
+} from "react";
+import { useTimer } from "react-timer-hook";
+import { useSettings } from "@/features/settings/context/SettingsContext";
 
 type Mode = "pomodoro" | "shortBreak" | "longBreak";
 

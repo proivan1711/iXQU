@@ -1,8 +1,8 @@
 "use client";
 
-import {BriefcaseBusiness, Coffee, Palmtree} from "lucide-react";
-import {Button} from "@/components/ui/button";
-import {usePomodoro} from "@/contexts/PomodoroContext";
+import { BriefcaseBusiness, Coffee, Palmtree } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { usePomodoro } from "@/contexts/PomodoroContext";
 
 export default function TimerIslandNav() {
   const { mode, restart } = usePomodoro();

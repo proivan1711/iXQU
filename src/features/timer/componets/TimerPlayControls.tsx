@@ -1,8 +1,14 @@
 "use client";
 
-import {ArrowBigLeftDash, ArrowBigRightDash, Pause, Play, RotateCw,} from "lucide-react";
-import {Button} from "@/components/ui/button";
-import {usePomodoro} from "@/contexts/PomodoroContext";
+import {
+  ArrowBigLeftDash,
+  ArrowBigRightDash,
+  Pause,
+  Play,
+  RotateCw,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { usePomodoro } from "@/contexts/PomodoroContext";
 
 export default function TimerPlayControls() {
   const { isRunning, resume, pause, restart, skipBackward, skip } =

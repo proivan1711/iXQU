@@ -1,6 +1,6 @@
 "use client";
 
-import {usePomodoro} from "@/contexts/PomodoroContext";
+import { usePomodoro } from "@/contexts/PomodoroContext";
 
 export default function Clock() {
   const { seconds, minutes, hours } = usePomodoro();
