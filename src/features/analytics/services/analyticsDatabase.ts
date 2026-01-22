@@ -1,4 +1,4 @@
-import {isObject, isValidISOString} from "@/utils";
+import { isObject, isValidISOString } from "@/utils";
 
 const ANALYTICS_LOCAL_STORAGE_KEY = "analytics";
 const INITIAL_ANALYTICS = {
@@ -45,7 +45,7 @@ function validateAnalyticsData(data: unknown): boolean {
   return isObject(data) && validatePomodoros(data.pomodoros);
 }
 
-function getData() {
+function _getData() {
   const data = localStorage.getItem(ANALYTICS_LOCAL_STORAGE_KEY);
 
   if (!data) {
