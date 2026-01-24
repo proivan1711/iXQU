@@ -1,7 +1,10 @@
 "use client";
 
-import {DEFAULT_SETTINGS, SETTINGS_LOCAL_STORAGE_KEY,} from "@/features/timer/config";
-import {isObject} from "@/utils";
+import {
+  DEFAULT_SETTINGS,
+  SETTINGS_LOCAL_STORAGE_KEY,
+} from "@/features/timer/config";
+import { isObject } from "@/utils";
 
 function initSettings() {
   localStorage.setItem(

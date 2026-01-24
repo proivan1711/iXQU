@@ -1,11 +1,11 @@
-import {SiGithub} from "@icons-pack/react-simple-icons";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
-    LongBreakDurationField,
-    PomodoroDurationField,
-    ShortBreakDurationField,
-    SkipDurationField,
+  LongBreakDurationField,
+  PomodoroDurationField,
+  ShortBreakDurationField,
+  SkipDurationField,
 } from "@/features/settings/components/SettingsFormFields";
 
 export default function SettingsForm() {

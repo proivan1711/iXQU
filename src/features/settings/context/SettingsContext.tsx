@@ -1,8 +1,17 @@
 "use client";
 
-import {createContext, type ReactNode, useContext, useEffect, useReducer,} from "react";
-import {getSettings, setSetting as setSettingRaw,} from "@/features/settings/services/settings";
-import {DEFAULT_SETTINGS} from "@/features/timer/config";
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
+import {
+  getSettings,
+  setSetting as setSettingRaw,
+} from "@/features/settings/services/settings";
+import { DEFAULT_SETTINGS } from "@/features/timer/config";
 
 interface SettingsContextValue {
   pomodoroDuration: number;

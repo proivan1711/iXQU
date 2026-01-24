@@ -1,17 +1,17 @@
 "use client";
 
-import {useEffect, useRef, useState} from "react";
-import {Slider} from "@/components/ui/slider";
-import {useSettings} from "@/features/settings/context/SettingsContext";
+import { useEffect, useRef, useState } from "react";
+import { Slider } from "@/components/ui/slider";
+import { useSettings } from "@/features/settings/context/SettingsContext";
 import {
-    MAX_LONG_BREAK_DURATION,
-    MAX_POMODORO_DURATION,
-    MAX_SHORT_BREAK_DURATION,
-    MAX_SKIP_DURATION,
-    MIN_LONG_BREAK_DURATION,
-    MIN_POMODORO_DURATION,
-    MIN_SHORT_BREAK_DURATION,
-    MIN_SKIP_DURATION
+  MAX_LONG_BREAK_DURATION,
+  MAX_POMODORO_DURATION,
+  MAX_SHORT_BREAK_DURATION,
+  MAX_SKIP_DURATION,
+  MIN_LONG_BREAK_DURATION,
+  MIN_POMODORO_DURATION,
+  MIN_SHORT_BREAK_DURATION,
+  MIN_SKIP_DURATION,
 } from "@/features/timer/config";
 
 const minPomodoroDurInMinutes = MIN_POMODORO_DURATION / 1000 / 60;
