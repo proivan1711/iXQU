@@ -1,15 +1,18 @@
 "use client";
 
 import {
-  createContext,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-  useContext,
-  useState,
+    createContext,
+    type Dispatch,
+    type ReactNode,
+    type SetStateAction,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
 } from "react";
-import { useTimer } from "react-timer-hook";
-import { useSettings } from "@/features/settings/context/SettingsContext";
+import {useTimer} from "react-timer-hook";
+import {useSettings} from "@/features/settings/context/SettingsContext";
 
 type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
@@ -41,11 +44,14 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
 
   const [mode, setMode] = useState<Mode>("pomodoro");
 
-  const modeDurations = {
-    pomodoro: pomodoroDuration,
-    shortBreak: shortBreakDuration,
-    longBreak: longBreakDuration,
-  };
+  const modeDurations = useMemo(
+    () => ({
+      pomodoro: pomodoroDuration,
+      shortBreak: shortBreakDuration,
+      longBreak: longBreakDuration,
+    }),
+    [pomodoroDuration, shortBreakDuration, longBreakDuration],
+  );
 
   const expiryTimestamp = new Date(Date.now() + modeDurations[mode]);
 
@@ -63,11 +69,15 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
     expiryTimestamp,
   });
 
-  const restart = (optMode: Mode = mode) => {
-    if (optMode !== mode) setMode(optMode);
+  const restart = useCallback(
+    function restart(optMode: Mode = mode) {
+      if (optMode !== mode) setMode(optMode);
 
-    rawRestart(new Date(Date.now() + modeDurations[optMode]));
-  };
+      rawRestart(new Date(Date.now() + modeDurations[optMode]));
+    },
+    [mode, rawRestart, modeDurations],
+  );
+
   const skip = () =>
     totalMilliseconds &&
     rawRestart(
@@ -85,6 +95,11 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
       new Date(Math.abs(Date.now() + totalMilliseconds - skipDuration)),
       isRunning,
     );
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: needs to rerender on settings change
+  useEffect(() => {
+    restart(mode);
+  }, [pomodoroDuration, shortBreakDuration, longBreakDuration, mode, restart]);
 
   return (
     <PomodoroContext.Provider
