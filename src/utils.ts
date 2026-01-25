@@ -1,5 +1,5 @@
 const ISO_STRING_REGEX =
-  /^([0-9]{4})-(1[0-2]|0[1-9])-(0[1-9]|[12][0-9]|3[01])$/;
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 
 export function isObject(struct: unknown): struct is Record<string, unknown> {
   return !!struct && typeof struct === "object" && !Array.isArray(struct);

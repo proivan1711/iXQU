@@ -17,3 +17,5 @@ export const DEFAULT_SETTINGS = {
   longBreakDuration: 15 * 60 * 1000,
   skipDuration: 15 * 1000,
 };
+
+export const MIN_POMODORO_TIME = 60 * 1000;
