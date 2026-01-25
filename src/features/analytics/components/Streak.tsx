@@ -1,8 +1,8 @@
 "use client";
 
-import {Flame} from "lucide-react";
-import {useEffect, useState} from "react";
-import {Card} from "@/components/ui/card";
+import { Flame } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Card } from "@/components/ui/card";
 import getPomodoroStreaks from "@/features/analytics/services/pomodoroStreaks";
 
 export default function Streak() {

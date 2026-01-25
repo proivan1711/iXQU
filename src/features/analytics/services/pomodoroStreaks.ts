@@ -1,4 +1,4 @@
-import {getData} from "@/features/analytics/services/analyticsDatabase";
+import { getData } from "@/features/analytics/services/analyticsDatabase";
 
 export default function getPomodoroStreaks() {
   const completedPomodoros = getData()

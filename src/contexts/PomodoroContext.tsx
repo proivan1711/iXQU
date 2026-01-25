@@ -1,21 +1,21 @@
 "use client";
 
 import {
-    createContext,
-    type Dispatch,
-    type ReactNode,
-    type SetStateAction,
-    useCallback,
-    useContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
+  createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
-import {useTimer} from "react-timer-hook";
-import {savePomodoro} from "@/features/analytics/services/analyticsDatabase";
-import {useSettings} from "@/features/settings/context/SettingsContext";
-import {MIN_POMODORO_TIME} from "@/features/timer/config";
+import { useTimer } from "react-timer-hook";
+import { savePomodoro } from "@/features/analytics/services/analyticsDatabase";
+import { useSettings } from "@/features/settings/context/SettingsContext";
+import { MIN_POMODORO_TIME } from "@/features/timer/config";
 
 type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
