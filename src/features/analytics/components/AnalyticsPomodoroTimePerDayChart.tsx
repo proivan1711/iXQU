@@ -1,10 +1,21 @@
 "use client";
 
-import {Area, AreaChart, CartesianGrid, XAxis} from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
-import {type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/components/ui/chart";
-import {getData} from "@/features/analytics/services/analyticsDatabase";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { getData } from "@/features/analytics/services/analyticsDatabase";
 
 const chartConfig = {
   desktop: {

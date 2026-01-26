@@ -1,4 +1,4 @@
-import { PomodoroContextProvider } from "@/contexts/PomodoroContext";
+import {PomodoroContextProvider} from "@/contexts/PomodoroContext";
 import Clock from "@/features/timer/componets/Clock";
 import TimerIslandNav from "@/features/timer/componets/TimerIslandNav";
 import TimerPlayControls from "@/features/timer/componets/TimerPlayControls";
