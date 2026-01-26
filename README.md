@@ -72,18 +72,18 @@ pnpm install
 
 3. Run the development server:
 ```bash
-pnpm dev
+pnpm run dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## 🚀 Available Scripts
 
-- `pnpm dev` - Start the development server
-- `pnpm build` - Build the application for production
-- `pnpm start` - Start the production server
-- `pnpm lint` - Run Biome linter checks
-- `pnpm format` - Format code with Biome (applies fixes)
+- `pnpm run dev` - Start the development server
+- `pnpm run build` - Build the application for production
+- `pnpm run start` - Start the production server
+- `pnpm run lint` - Run Biome linter checks
+- `pnpm run format` - Format code with Biome (applies fixes)
 
 ## 📁 Project Structure
 
