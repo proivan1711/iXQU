@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import AnalyticsPomodoroTimePerDayChart from "@/features/analytics/components/AnalyticsPomodoroTimePerDayChart";
 import Streak from "@/features/analytics/components/Streak";
 import TotalPomodorosCard from "@/features/analytics/components/TotalPomodorosCard";
 import TotalTimePomodoro from "@/features/analytics/components/TotalTimePomodoro";
-import { getData } from "@/features/analytics/services/analyticsDatabase";
+import {getData} from "@/features/analytics/services/analyticsDatabase";
 
 export default function Analytics() {
   const [isMounted, setIsMounted] = useState(false);
@@ -19,7 +19,7 @@ export default function Analytics() {
     pomodoros.reduce(
       (acc, pomodoro) => acc + pomodoro.totalDuration / 1000 / 60,
       0,
-    ),
+    ) / 60,
   );
 
   return (
