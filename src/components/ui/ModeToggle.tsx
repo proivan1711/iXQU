@@ -1,9 +1,9 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import {Moon, Sun} from "lucide-react";
+import {useTheme} from "next-themes";
+import {useState} from "react";
+import {Button} from "@/components/ui/button";
 
 export default function ModeToggle() {
   const { setTheme } = useTheme();
@@ -12,6 +12,7 @@ export default function ModeToggle() {
 
   return (
     <Button
+        className="absolute right-6 top-6"
       size="lg"
       onClick={() => {
         const isDarkModeConst = !isDarkMode;

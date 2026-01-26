@@ -1,6 +1,6 @@
-import { SiGithub } from "@icons-pack/react-simple-icons";
+import {SiGithub} from "@icons-pack/react-simple-icons";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {
   LongBreakDurationField,
   PomodoroDurationField,
@@ -10,7 +10,7 @@ import {
 
 export default function SettingsForm() {
   return (
-    <form className="bg-card w-[85%] sm:w-[75%] max-w-7xl h-fit rounded-2xl flex flex-col justify-between items-start px-10 pt-20 pb-5 gap-15 mb-20">
+    <form className="bg-card border border-border w-[85%] sm:w-[75%] max-w-7xl h-fit rounded-2xl flex flex-col justify-between items-start px-10 pt-20 pb-5 gap-15 mb-20">
       <div className="flex flex-col w-full gap-15">
         <PomodoroDurationField />
         <ShortBreakDurationField />
