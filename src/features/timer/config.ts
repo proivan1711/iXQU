@@ -18,4 +18,4 @@ export const DEFAULT_SETTINGS = {
   skipDuration: 15 * 1000,
 };
 
-export const MIN_POMODORO_TIME = 60 * 1000;
+export const MIN_POMODORO_TIME_SAVE = 60 * 1000;

@@ -1,21 +1,21 @@
 "use client";
 
 import {
-  createContext,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
+    createContext,
+    type Dispatch,
+    type ReactNode,
+    type SetStateAction,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
 } from "react";
-import { useTimer } from "react-timer-hook";
-import { savePomodoro } from "@/features/analytics/services/analyticsDatabase";
-import { useSettings } from "@/features/settings/context/SettingsContext";
-import { MIN_POMODORO_TIME } from "@/features/timer/config";
+import {useTimer} from "react-timer-hook";
+import {savePomodoro} from "@/features/analytics/services/analyticsDatabase";
+import {useSettings} from "@/features/settings/context/SettingsContext";
+import {MIN_POMODORO_TIME_SAVE} from "@/features/timer/config";
 
 type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
@@ -78,7 +78,7 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
         savePomodoro({
           id: pomodoroSession.current,
           goalTime: pomodoroDuration,
-          totalTime: pomodoroDuration,
+          totalTime: pomodoroDuration - totalMilliseconds,
         });
       }
       pomodoroSession.current = crypto.randomUUID();
@@ -94,12 +94,10 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
 
   const restart = useCallback(
     function restart(optMode: Mode = mode) {
-      const elapsedTime =
-        saveStateRef.current.goalTime - saveStateRef.current.totalTime;
       if (
         mode === "pomodoro" &&
         optMode !== mode &&
-        elapsedTime >= MIN_POMODORO_TIME
+        saveStateRef.current.totalTime >= MIN_POMODORO_TIME_SAVE
       ) {
         savePomodoro({
           id: pomodoroSession.current,
@@ -140,7 +138,7 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
       if (
         document.hidden &&
         mode === "pomodoro" &&
-        totalMilliseconds >= MIN_POMODORO_TIME
+        pomodoroDuration - totalMilliseconds >= MIN_POMODORO_TIME_SAVE
       ) {
         savePomodoro({
           id: pomodoroSession.current,
@@ -153,16 +151,15 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
   );
 
   const handlePomodoroInterval = useCallback(() => {
-    const { mode, id, goalTime, totalTime } = saveStateRef.current;
-    const elapsedTime = goalTime - totalTime;
-    if (mode === "pomodoro" && elapsedTime >= MIN_POMODORO_TIME) {
+    const { id, totalTime, goalTime } = saveStateRef.current;
+    if (mode === "pomodoro" && goalTime - totalTime >= MIN_POMODORO_TIME_SAVE) {
       savePomodoro({
         id,
         goalTime,
         totalTime,
       });
     }
-  }, []);
+  }, [mode]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: no need for mode dependency
   useEffect(() => {
@@ -176,18 +173,10 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
   ]);
 
   useEffect(() => {
-    if (
-      mode === "pomodoro" &&
-      saveStateRef.current.totalTime >= MIN_POMODORO_TIME
-    )
-      savePomodoro({ id: pomodoroSession.current, goalTime: pomodoroDuration });
-  }, [mode, pomodoroDuration]);
-
-  useEffect(() => {
     saveStateRef.current = {
       id: pomodoroSession.current,
       goalTime: pomodoroDuration,
-      totalTime: totalMilliseconds,
+      totalTime: pomodoroDuration - totalMilliseconds,
       mode,
     };
   });

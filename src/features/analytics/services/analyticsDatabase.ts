@@ -1,4 +1,4 @@
-import { isObject, isValidISOString } from "@/utils";
+import {isObject, isValidISOString} from "@/utils";
 
 const ANALYTICS_LOCAL_STORAGE_KEY = "analytics";
 const INITIAL_ANALYTICS = {
@@ -53,7 +53,7 @@ export function getData(): Analytics {
   const data = localStorage.getItem(ANALYTICS_LOCAL_STORAGE_KEY);
 
   if (!data) {
-    console.warn("No data found");
+    console.warn("No local analytics data found");
     console.log("Initializing analytics data");
     return initAnalytic();
   }
@@ -67,8 +67,7 @@ export function getData(): Analytics {
       console.warn("Resetting pomodoro data");
       return initAnalytic();
     }
-  } catch (e) {
-    console.log(e);
+  } catch {
     console.error("There was a problem getting analytics from localStorage");
     return initAnalytic();
   }
@@ -89,7 +88,7 @@ export function savePomodoro({
 }: {
   id: string;
   goalTime: number;
-  totalTime?: number;
+  totalTime: number;
 }) {
   const data = getData();
 
