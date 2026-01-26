@@ -1,21 +1,10 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import {Area, AreaChart, CartesianGrid, XAxis} from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { getData } from "@/features/analytics/services/analyticsDatabase";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
+import {type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/components/ui/chart";
+import {getData} from "@/features/analytics/services/analyticsDatabase";
 
 const chartConfig = {
   desktop: {
@@ -35,14 +24,14 @@ export default function AnalyticsPomodoroTimePerDayChart() {
           month: "short",
           day: "numeric",
         }),
-        totalDuration: pomodoro.totalDuration / 60 / 1000,
+        totalDuration: Math.floor(pomodoro.totalDuration / 60 / 1000),
         timestamp: date.getTime(),
       };
     })
     .sort((a, b) => a.timestamp - b.timestamp);
 
   return (
-    <Card>
+    <Card className="col-span-full lg:max-w-[120dvh]">
       <CardHeader>
         <CardTitle>Pomodoros time</CardTitle>
         <CardDescription>Showing each pomodoro session</CardDescription>
@@ -67,6 +56,7 @@ export default function AnalyticsPomodoroTimePerDayChart() {
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}
+              formatter={(value) => ["Total duration: ", `${value} min`]}
             />
             <Area
               dataKey="totalDuration"

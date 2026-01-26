@@ -1,8 +1,8 @@
 "use client";
 
-import { Flame } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Card } from "@/components/ui/card";
+import {Flame} from "lucide-react";
+import {useEffect, useState} from "react";
+import {Card, CardDescription, CardHeader, CardTitle,} from "@/components/ui/card";
 import getPomodoroStreaks from "@/features/analytics/services/pomodoroStreaks";
 
 export default function Streak() {
@@ -15,15 +15,16 @@ export default function Streak() {
   const streak = isMounted ? getPomodoroStreaks() : 0;
 
   return (
-    <Card className="md:max-w-fit mb-10 flex-row justify-start gap-20 items-center p-10">
-      <Flame
-        size={110}
-        className={streak === 0 ? "stroke-foreground" : "stroke-primary"}
-      />
-      <span className="">
-        <span className="text-8xl font-mono font-bold">{streak}</span>
-        <span className="font-mono font-bold text-3xl ml-4">days</span>
-      </span>
+    <Card className="col-span-full sm:col-span-1">
+      <CardHeader>
+        <CardDescription>Streak</CardDescription>
+        <CardTitle className="text-6xl font-semibold mt-2 flex items-center gap-4 md:gap-6">
+          <Flame
+            className={`size-13 md:size-14 ${streak ? "stroke-primary" : "stroke-foreground"}`}
+          />
+          <span>{streak}</span>
+        </CardTitle>
+      </CardHeader>
     </Card>
   );
 }
