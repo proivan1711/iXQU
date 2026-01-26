@@ -1,4 +1,4 @@
-import {isObject, isValidISOString} from "@/utils";
+import { isObject, isValidISOString } from "@/utils";
 
 const ANALYTICS_LOCAL_STORAGE_KEY = "analytics";
 const INITIAL_ANALYTICS = {
