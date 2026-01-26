@@ -108,7 +108,7 @@ iXQU/
 │   │   │   ├── context/        # Settings context
 │   │   │   └── services/       # Settings data management
 │   │   └── timer/              # Timer functionality
-│   │       ├── componets/      # Timer components
+│   │       ├── components/     # Timer components
 │   │       └── config.ts       # Timer configuration
 │   ├── contexts/               # React contexts
 │   │   └── PomodoroContext.tsx # Pomodoro state management
