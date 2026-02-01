@@ -19,3 +19,6 @@ export const DEFAULT_SETTINGS = {
 };
 
 export const MIN_POMODORO_TIME_SAVE = 60 * 1000;
+
+export const ALARM_SOUND_ID = "pomodoro-alarm";
+export const TIMER_NOTIFICATION_ID = "timer-notification";

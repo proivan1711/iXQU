@@ -1,23 +1,26 @@
 "use client";
 
 import {
-  createContext,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
+    createContext,
+    type Dispatch,
+    type ReactNode,
+    type SetStateAction,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
 } from "react";
-import { useTimer } from "react-timer-hook";
-import { savePomodoro } from "@/features/analytics/services/analyticsDatabase";
-import { useSettings } from "@/features/settings/context/SettingsContext";
-import { MIN_POMODORO_TIME_SAVE } from "@/features/timer/config";
+import {useTimer} from "react-timer-hook";
+import {toast} from "sonner";
+import useSound from "use-sound";
+import {savePomodoro} from "@/features/analytics/services/analyticsDatabase";
+import {useSettings} from "@/features/settings/context/SettingsContext";
+import TimeUpNotification from "@/features/timer/componets/TimeUpNotification";
+import {ALARM_SOUND_ID, MIN_POMODORO_TIME_SAVE, TIMER_NOTIFICATION_ID,} from "@/features/timer/config";
 
-type Mode = "pomodoro" | "shortBreak" | "longBreak";
+export type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
 const PomodoroContext = createContext<
   | {
@@ -49,6 +52,11 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
 
   const pomodoroSession = useRef<string>(crypto.randomUUID());
   const [mode, setMode] = useState<Mode>("pomodoro");
+
+  const [playAlarm, { stop: stopAlarm }] = useSound("/sounds/alarm.mp3", {
+    id: ALARM_SOUND_ID,
+    interrupt: true,
+  });
 
   const modeDurations = useMemo(
     () => ({
@@ -91,6 +99,7 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
     totalTime: pomodoroDuration - totalMilliseconds,
     mode,
   });
+  const lastNotifiedSession = useRef<string | null>(null);
 
   const restart = useCallback(
     function restart(optMode: Mode = mode) {
@@ -180,6 +189,39 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
       mode,
     };
   });
+
+  useEffect(() => {
+    if (
+      totalMilliseconds === 0 &&
+      !(lastNotifiedSession.current === pomodoroSession.current)
+    ) {
+      lastNotifiedSession.current = pomodoroSession.current;
+      const classes = ["blur-md", "pointer-events-none"];
+
+      const main = document.querySelector("main");
+      const sidebar = document.querySelector("[data-slot='sidebar']");
+
+      document.body.classList.add("overflow-hidden");
+      main?.classList.add(...classes);
+      sidebar?.classList.add(...classes);
+
+      toast.message(<TimeUpNotification mode={mode} restart={restart} />, {
+        position: "top-center",
+        id: TIMER_NOTIFICATION_ID,
+        duration: 100000 * 1000,
+        onDismiss() {
+          stopAlarm();
+          document.body.classList.remove("overflow-hidden");
+          main?.classList.remove(...classes);
+          sidebar?.classList.remove(...classes);
+        },
+        onAutoClose() {
+          restart(mode === "pomodoro" ? "shortBreak" : "pomodoro");
+        },
+      });
+      playAlarm();
+    }
+  }, [mode, playAlarm, restart, stopAlarm, totalMilliseconds]);
 
   useEffect(() => {
     const timerId = window.setInterval(handlePomodoroInterval, 60 * 1000);
