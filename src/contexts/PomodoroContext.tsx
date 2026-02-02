@@ -1,24 +1,28 @@
 "use client";
 
 import {
-    createContext,
-    type Dispatch,
-    type ReactNode,
-    type SetStateAction,
-    useCallback,
-    useContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
+  createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
-import {useTimer} from "react-timer-hook";
-import {toast} from "sonner";
+import { useTimer } from "react-timer-hook";
+import { toast } from "sonner";
 import useSound from "use-sound";
-import {savePomodoro} from "@/features/analytics/services/analyticsDatabase";
-import {useSettings} from "@/features/settings/context/SettingsContext";
+import { savePomodoro } from "@/features/analytics/services/analyticsDatabase";
+import { useSettings } from "@/features/settings/context/SettingsContext";
 import TimeUpNotification from "@/features/timer/componets/TimeUpNotification";
-import {ALARM_SOUND_ID, MIN_POMODORO_TIME_SAVE, TIMER_NOTIFICATION_ID,} from "@/features/timer/config";
+import {
+  ALARM_SOUND_ID,
+  MIN_POMODORO_TIME_SAVE,
+  TIMER_NOTIFICATION_ID,
+} from "@/features/timer/config";
 
 export type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
