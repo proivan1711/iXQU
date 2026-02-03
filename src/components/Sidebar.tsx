@@ -1,7 +1,7 @@
 "use client";
 
-import {PieChart, Settings, Timer} from "lucide-react";
-import {usePathname} from "next/dist/client/components/navigation";
+import { PieChart, Settings, Timer } from "lucide-react";
+import { usePathname } from "next/dist/client/components/navigation";
 import Link from "next/link";
 import {
   Sidebar as ShadcnSidebar,

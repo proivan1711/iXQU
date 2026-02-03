@@ -1,9 +1,9 @@
 "use client";
 
-import {Check, X} from "lucide-react";
-import {useState} from "react";
-import {toast} from "sonner";
-import {Button} from "@/components/ui/button";
+import { Check, X } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -13,9 +13,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {getData} from "@/features/analytics/services/analyticsDatabase";
-import {getSettings, setSetting} from "@/features/settings/services/settings";
-import {MIN_POMODOROS_FOR_NOTIFICATION_AUTO_ASK} from "@/features/timer/config";
+import { getData } from "@/features/analytics/services/analyticsDatabase";
+import { getSettings, setSetting } from "@/features/settings/services/settings";
+import { MIN_POMODOROS_FOR_NOTIFICATION_AUTO_ASK } from "@/features/timer/config";
 
 export default function NotificationPrompt() {
   const {
