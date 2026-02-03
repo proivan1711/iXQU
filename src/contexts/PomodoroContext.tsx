@@ -1,28 +1,25 @@
 "use client";
 
 import {
-  createContext,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
+    createContext,
+    type Dispatch,
+    type ReactNode,
+    type SetStateAction,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
 } from "react";
-import { useTimer } from "react-timer-hook";
-import { toast } from "sonner";
+import {useTimer} from "react-timer-hook";
+import {toast} from "sonner";
 import useSound from "use-sound";
-import { savePomodoro } from "@/features/analytics/services/analyticsDatabase";
-import { useSettings } from "@/features/settings/context/SettingsContext";
+import {savePomodoro} from "@/features/analytics/services/analyticsDatabase";
+import {useSettings} from "@/features/settings/context/SettingsContext";
+import {getSettings} from "@/features/settings/services/settings";
 import TimeUpNotification from "@/features/timer/componets/TimeUpNotification";
-import {
-  ALARM_SOUND_ID,
-  MIN_POMODORO_TIME_SAVE,
-  TIMER_NOTIFICATION_ID,
-} from "@/features/timer/config";
+import {ALARM_SOUND_ID, MIN_POMODORO_TIME_SAVE, TIMER_NOTIFICATION_ID,} from "@/features/timer/config";
 
 export type Mode = "pomodoro" | "shortBreak" | "longBreak";
 
@@ -208,6 +205,17 @@ export function PomodoroContextProvider({ children }: { children: ReactNode }) {
       document.body.classList.add("overflow-hidden");
       main?.classList.add(...classes);
       sidebar?.classList.add(...classes);
+
+      if (getSettings().allowedNotifications) {
+        const notif = new Notification(`Time is up!`, {
+          icon: `${window.location.origin}/images/timer.svg`,
+          body: mode === "pomodoro" ? "Time for a break!" : "Back to work!",
+        });
+        notif.addEventListener("close", () => {
+          stopAlarm();
+          toast.dismiss(TIMER_NOTIFICATION_ID);
+        });
+      }
 
       toast.message(<TimeUpNotification mode={mode} restart={restart} />, {
         position: "top-center",

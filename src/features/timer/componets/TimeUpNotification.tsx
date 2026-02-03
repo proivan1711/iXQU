@@ -1,7 +1,7 @@
-import {toast} from "sonner";
-import {Button} from "@/components/ui/button";
-import type {Mode} from "@/contexts/PomodoroContext";
-import {TIMER_NOTIFICATION_ID} from "@/features/timer/config";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import type { Mode } from "@/contexts/PomodoroContext";
+import { TIMER_NOTIFICATION_ID } from "@/features/timer/config";
 
 export default function TimeUpNotification({
   restart,

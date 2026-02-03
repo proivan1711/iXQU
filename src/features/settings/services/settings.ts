@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  DEFAULT_SETTINGS,
-  SETTINGS_LOCAL_STORAGE_KEY,
-} from "@/features/timer/config";
-import { isObject } from "@/utils";
+import {DEFAULT_SETTINGS, SETTINGS_LOCAL_STORAGE_KEY,} from "@/features/timer/config";
+import {isObject} from "@/utils";
 
 function initSettings() {
   localStorage.setItem(
@@ -39,12 +36,12 @@ export function getSettings(): typeof DEFAULT_SETTINGS {
   }
 }
 
-export function setSetting({
+export function setSetting<K extends keyof typeof DEFAULT_SETTINGS>({
   settingsKey,
   value,
 }: {
-  settingsKey: keyof typeof DEFAULT_SETTINGS;
-  value: number;
+  settingsKey: K;
+  value: (typeof DEFAULT_SETTINGS)[K];
 }): typeof DEFAULT_SETTINGS {
   const settings = getSettings();
   settings[settingsKey] = value;

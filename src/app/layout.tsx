@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { Figtree, Geist, Geist_Mono } from "next/font/google";
+import type {Metadata} from "next";
+import {Figtree, Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
-import type { ReactNode } from "react";
+import type {ReactNode} from "react";
 import Sidebar from "@/components/Sidebar";
-import { ThemeProvider } from "@/components/theme-provider";
+import {ThemeProvider} from "@/components/theme-provider";
 import ModeToggle from "@/components/ui/ModeToggle";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Toaster } from "@/components/ui/sonner";
-import { SettingsContextProvider } from "@/features/settings/context/SettingsContext";
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
+import {Toaster} from "@/components/ui/sonner";
+import {SettingsContextProvider} from "@/features/settings/context/SettingsContext";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -50,7 +50,7 @@ export default function RootLayout({
                 <ModeToggle />
                 {children}
               </main>
-              <Toaster />
+              <Toaster position="top-center" richColors={true} />
             </SettingsContextProvider>
           </SidebarProvider>
         </ThemeProvider>

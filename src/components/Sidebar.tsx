@@ -1,7 +1,7 @@
 "use client";
 
-import { PieChart, Settings, Timer } from "lucide-react";
-import { usePathname } from "next/dist/client/components/navigation"; // Menu items.
+import {PieChart, Settings, Timer} from "lucide-react";
+import {usePathname} from "next/dist/client/components/navigation";
 import Link from "next/link";
 import {
   Sidebar as ShadcnSidebar,
@@ -12,9 +12,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"; // Menu items.
+} from "@/components/ui/sidebar";
 
-// Menu items.
 const items = [
   {
     title: "Timer",
@@ -34,7 +33,7 @@ const items = [
 ];
 
 export default function Sidebar() {
-  const placeholderAppVersion = "1.0 beta";
+  const build = `${process.env.NODE_ENV === "development" ? "Development build" : ""}`;
   const pageUrl = usePathname();
 
   return (
@@ -58,8 +57,8 @@ export default function Sidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <p className="text-center mb-2 text-sm font-semibold text-muted-foreground">
-        {placeholderAppVersion}
+      <p className="text-center mb-2 text-xs font-semibold text-muted-foreground">
+        {build} v{process.env.NEXT_PUBLIC_APP_VERSION}
       </p>
     </ShadcnSidebar>
   );
