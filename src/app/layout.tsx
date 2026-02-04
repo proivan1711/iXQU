@@ -73,6 +73,9 @@ export const metadata: Metadata = {
   },
   applicationName: "iXQU",
   category: "Productivity",
+  verification: {
+    google: "HwXn1H4t0uzy87DbT5oEDGLd1fT5tohT8hTo-GTZUkg",
+  },
 };
 
 export default function RootLayout({
