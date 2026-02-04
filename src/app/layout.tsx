@@ -22,8 +22,57 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "iXQU - flow",
-  description: "A privacy-focused pomodoro timer.",
+  metadataBase: new URL("https://ixqu.ivanlukan.dev"),
+  title: {
+    default: "iXQU – Privacy-Focused Pomodoro Timer & Focus App",
+    template: "%s | iXQU",
+  },
+  description:
+    "iXQU is a modern, local-only Pomodoro timer built with Next.js. Customize work sessions (15 min–5 hours), breaks, alarms with audio, browser notifications, and track streaks/analytics offline. No tracking, no servers.",
+  keywords: [
+    "pomodoro timer",
+    "focus app",
+    "productivity timer",
+    "privacy focused pomodoro",
+    "browser notifications pomodoro",
+    "customizable pomodoro",
+  ],
+  authors: [{ name: "Ivan Lukan", url: "https://ivanlukan.dev" }],
+  creator: "Ivan Lukan",
+  publisher: "Ivan Lukan",
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://ixqu.ivanlukan.dev",
+  },
+  openGraph: {
+    title: "iXQU – Privacy-Focused Pomodoro Timer",
+    description:
+      "Boost focus with customizable Pomodoro sessions, gentle alarms, browser alerts, and local analytics. All data stays in your browser.",
+    url: "https://ixqu.ivanlukan.dev",
+    siteName: "iXQU",
+    images: [
+      {
+        url: "/images/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "iXQU Pomodoro Timer Interface",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "iXQU – Privacy-Focused Pomodoro Timer",
+    description:
+      "Local-only focus tool with customizable timers and analytics.",
+    images: ["/images/og-image.svg"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  applicationName: "iXQU",
+  category: "Productivity",
 };
 
 export default function RootLayout({

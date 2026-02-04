@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import SettingsForm from "@/features/settings/components/SettingsForm";
+
+export const metadata: Metadata = {
+  title: "Settings",
+  description:
+    "Customize your pomodoro experience, pomodoro time, notifications, breaks and more.",
+};
 
 export default function Settings() {
   return (

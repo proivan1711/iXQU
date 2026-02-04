@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ixqu.ivanlukan.dev/sitemap.xml
