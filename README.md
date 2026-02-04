@@ -13,6 +13,10 @@ A modern, privacy-focused Pomodoro timer application built with Next.js. iXQU he
   - Session restart capability
 - **Visual Clock Display**: Clear, easy-to-read countdown timer
 - **Mode Switching**: Seamlessly switch between pomodoro, short break, and long break modes
+- **Alarms & Notifications**: 
+  - Audio alarm plays when pomodoro or break completes
+  - Browser notifications alert you when timer finishes (optional, can be enabled in settings)
+  - In-app notification with quick actions to start next session
 
 ### 📊 Analytics Dashboard
 - **Total Pomodoros Tracking**: View the total number of completed pomodoro sessions
@@ -27,6 +31,7 @@ A modern, privacy-focused Pomodoro timer application built with Next.js. iXQU he
   - Short break duration (1-10 minutes)
   - Long break duration (10-30 minutes)
   - Skip duration for quick time adjustments (1-30 seconds)
+- **Notification Preferences**: Enable or disable browser notifications for timer completion
 - **Persistent Settings**: Your preferences are saved locally for future sessions
 
 ### 🎨 User Experience
