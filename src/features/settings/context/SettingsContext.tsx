@@ -13,27 +13,20 @@ import {
 } from "@/features/settings/services/settings";
 import { DEFAULT_SETTINGS } from "@/features/timer/config";
 
-interface SettingsContextValue {
-  pomodoroDuration: number;
-  shortBreakDuration: number;
-  longBreakDuration: number;
-  skipDuration: number;
-  setSetting: typeof setSettingRaw;
-}
+type SettingsData = typeof DEFAULT_SETTINGS;
 
+type SettingsContextValue = SettingsData & {
+  setSetting: typeof setSettingRaw;
+};
 const SettingsContext = createContext<undefined | SettingsContextValue>(
   undefined,
 );
 
-type SetSettingAction = {
+type SetSettingAction<K extends keyof typeof DEFAULT_SETTINGS> = {
   type: "SET_SETTING";
   payload: {
-    field:
-      | "pomodoroDuration"
-      | "shortBreakDuration"
-      | "longBreakDuration"
-      | "skipDuration";
-    value: number;
+    field: keyof typeof DEFAULT_SETTINGS;
+    value: (typeof DEFAULT_SETTINGS)[K];
   };
 };
 
@@ -42,14 +35,17 @@ type UpdateAllSettingsAction = {
   payload: Omit<SettingsContextValue, "setSetting">;
 };
 
-type Action = SetSettingAction | UpdateAllSettingsAction;
+type Actions =
+  | SetSettingAction<keyof typeof DEFAULT_SETTINGS>
+  | UpdateAllSettingsAction;
 
-function reducer(state: SettingsContextValue, action: Action) {
+function reducer(state: SettingsContextValue, action: Actions) {
   switch (action.type) {
     case "SET_SETTING": {
-      const newSettings = { ...state };
-      newSettings[action.payload.field] = action.payload.value;
-      return newSettings;
+      return {
+        ...state,
+        [action.payload.field]: action.payload.value,
+      } as SettingsContextValue;
     }
     case "UPDATE_ALL": {
       return {
