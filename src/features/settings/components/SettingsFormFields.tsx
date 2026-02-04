@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
 import { useSettings } from "@/features/settings/context/SettingsContext";
+import useNotifications from "@/features/settings/hooks/useNotifications";
 import {
   MAX_LONG_BREAK_DURATION,
   MAX_POMODORO_DURATION,
@@ -212,6 +214,35 @@ export function SkipDurationField() {
         />
       )}
       <span className="text-md font-semibold font-mono">{skipDuration} s</span>
+    </div>
+  );
+}
+
+export function NotificationField() {
+  const {
+    getNotificationPermission,
+    allowedNotifications,
+    removeNotificationPermission,
+  } = useNotifications();
+
+  return (
+    <div className="flex items-center gap-5">
+      <label
+        htmlFor="notification-switch"
+        className="text-md font-semibold font-mono"
+      >
+        Notifications for timer
+      </label>
+      <Switch
+        checked={allowedNotifications}
+        onCheckedChange={(isChecked) => {
+          console.log(isChecked);
+          isChecked
+            ? getNotificationPermission()
+            : removeNotificationPermission();
+        }}
+        id="notification-switch"
+      />
     </div>
   );
 }

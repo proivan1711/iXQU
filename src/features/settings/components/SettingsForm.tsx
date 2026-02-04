@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   LongBreakDurationField,
+  NotificationField,
   PomodoroDurationField,
   ShortBreakDurationField,
   SkipDurationField,
@@ -21,6 +22,7 @@ export default function SettingsForm() {
         <ShortBreakDurationField />
         <LongBreakDurationField />
         <SkipDurationField />
+        <NotificationField />
       </div>
       <div className="flex w-full justify-between items-center">
         <Link href="https://github.com/proivan1711/ixqu">
