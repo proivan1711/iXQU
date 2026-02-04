@@ -1,8 +1,6 @@
 "use client";
 
 import { Check, X } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,7 +12,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { getData } from "@/features/analytics/services/analyticsDatabase";
-import { getSettings, setSetting } from "@/features/settings/services/settings";
+import useNotifications from "@/features/settings/hooks/useNotifications";
 import { MIN_POMODOROS_FOR_NOTIFICATION_AUTO_ASK } from "@/features/timer/config";
 
 export default function NotificationPrompt() {
@@ -22,12 +20,14 @@ export default function NotificationPrompt() {
     pomodoros: { length: pomodorosCount },
   } = getData();
 
-  const [hasAllowedNotifications, setHasAllowedNotifications] = useState<
-    null | boolean
-  >(() => getSettings().allowedNotifications);
+  const {
+    allowedNotifications,
+    getNotificationPermission,
+    removeNotificationPermission,
+  } = useNotifications();
 
   if (
-    hasAllowedNotifications === null &&
+    allowedNotifications === null &&
     pomodorosCount >= MIN_POMODOROS_FOR_NOTIFICATION_AUTO_ASK
   ) {
     return (
@@ -49,52 +49,13 @@ export default function NotificationPrompt() {
             </span>
           </DialogDescription>
           <DialogFooter>
-            <DialogClose
-              onClick={() => {
-                setSetting({
-                  settingsKey: "allowedNotifications",
-                  value: false,
-                });
-                setHasAllowedNotifications(false);
-              }}
-              asChild={true}
-            >
+            <DialogClose onClick={removeNotificationPermission} asChild={true}>
               <Button variant="outline">
                 <X />
                 <span>No thanks</span>
               </Button>
             </DialogClose>
-            <DialogClose
-              asChild={true}
-              onClick={() => {
-                toast.promise(
-                  async () => {
-                    const res = await Notification.requestPermission();
-                    if (res === "denied" || res === "default") {
-                      setSetting({
-                        settingsKey: "allowedNotifications",
-                        value: false,
-                      });
-                      setHasAllowedNotifications(false);
-                      await Promise.reject("Notification denied");
-                    } else {
-                      setSetting({
-                        settingsKey: "allowedNotifications",
-                        value: true,
-                      });
-                      setHasAllowedNotifications(true);
-                      await Promise.resolve();
-                    }
-                  },
-                  {
-                    success: "Notifications allowed",
-                    error: "Notification permission denied",
-                    loading: "Requesting notification permission",
-                    duration: 1000 * 10,
-                  },
-                );
-              }}
-            >
+            <DialogClose asChild={true} onClick={getNotificationPermission}>
               <Button>
                 <Check />
                 <span>Yes please</span>

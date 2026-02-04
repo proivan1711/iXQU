@@ -234,7 +234,7 @@ export function NotificationField() {
         Notifications for timer
       </label>
       <Switch
-        checked={allowedNotifications}
+        checked={allowedNotifications ?? false}
         onCheckedChange={(isChecked) => {
           console.log(isChecked);
           isChecked

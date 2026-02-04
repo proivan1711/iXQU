@@ -10,8 +10,8 @@ const NOTIFICATION_TOAST_ID = "notification-switcher";
 export default function useNotifications() {
   const { allowedNotifications: allowedNotificationsRaw } = useSettings();
 
-  const [allowedNotifications, setAllowedNotifications] = useState<boolean>(
-    allowedNotificationsRaw ?? false,
+  const [allowedNotifications, setAllowedNotifications] = useState(
+    allowedNotificationsRaw,
   );
 
   function getNotificationPermission() {
