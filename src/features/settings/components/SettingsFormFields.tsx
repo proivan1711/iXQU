@@ -236,7 +236,6 @@ export function NotificationField() {
       <Switch
         checked={allowedNotifications ?? false}
         onCheckedChange={(isChecked) => {
-          console.log(isChecked);
           isChecked
             ? getNotificationPermission()
             : removeNotificationPermission();
