@@ -1,6 +1,6 @@
 "use client";
 
-import { PieChart, Settings, Timer } from "lucide-react";
+import { ChartNoAxesCombined, PieChart, Settings, Timer } from "lucide-react";
 import { usePathname } from "next/dist/client/components/navigation";
 import Link from "next/link";
 import {
@@ -29,6 +29,11 @@ const items = [
     title: "Settings",
     url: "/settings",
     icon: Settings,
+  },
+  {
+    title: "Goals",
+    url: "/goals",
+    icon: ChartNoAxesCombined,
   },
 ];
 
