@@ -26,14 +26,14 @@ const items = [
     icon: PieChart,
   },
   {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
-  },
-  {
     title: "Goals",
     url: "/goals",
     icon: ChartNoAxesCombined,
+  },
+  {
+    title: "Settings",
+    url: "/settings",
+    icon: Settings,
   },
 ];
 
