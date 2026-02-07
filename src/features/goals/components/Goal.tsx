@@ -1,21 +1,12 @@
 "use client";
 
-import { formatDuration } from "date-fns";
-import { Bar, BarChart } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { Progress } from "@/components/ui/progress";
+import {formatDuration} from "date-fns";
+import {Trash} from "lucide-react";
+import {Bar, BarChart} from "recharts";
+import {Button} from "@/components/ui/button";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card";
+import {type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/components/ui/chart";
+import {Progress} from "@/components/ui/progress";
 
 const chartConfig = {
   pomodoros: {
@@ -56,7 +47,7 @@ const data = [
 
 export default function GoalCard() {
   return (
-    <Card>
+    <Card className="w-100">
       <CardHeader>
         <CardTitle className="text-2xl font-semibold">
           Full stack web developer
@@ -77,11 +68,20 @@ export default function GoalCard() {
                 });
               }}
             />
-            <Bar dataKey={"value"}></Bar>
+            <Bar dataKey={"value"} fill={"var(--color-primary)"} />
           </BarChart>
         </ChartContainer>
-        <Progress value={30} />
+        <div className="flex flex-col gap-2">
+          <Progress value={30} />
+          <span className="font-semibold">5 / 50 min</span>
+        </div>
       </CardContent>
+      <CardFooter className="justify-between">
+        <Button variant="outline" size="icon">
+          <Trash />
+        </Button>
+        <Button>Start</Button>
+      </CardFooter>
     </Card>
   );
 }
