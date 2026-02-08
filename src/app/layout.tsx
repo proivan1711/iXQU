@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     images: ["/images/og-image.svg"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.svg",
   },
   applicationName: "iXQU",
   category: "Productivity",

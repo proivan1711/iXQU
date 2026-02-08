@@ -1,12 +1,24 @@
 "use client";
 
-import {formatDuration} from "date-fns";
-import {Trash} from "lucide-react";
-import {Bar, BarChart} from "recharts";
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card";
-import {type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/components/ui/chart";
-import {Progress} from "@/components/ui/progress";
+import { formatDuration } from "date-fns";
+import { Trash } from "lucide-react";
+import { Bar, BarChart } from "recharts";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Progress } from "@/components/ui/progress";
 
 const chartConfig = {
   pomodoros: {
